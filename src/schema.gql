@@ -1,0 +1,96 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Author {
+  _id: ID!
+
+  """Short biography"""
+  bio: String
+
+  """All books written by this author"""
+  books: [Book!]!
+
+  """Full name of the author"""
+  name: String!
+}
+
+type Book {
+  _id: ID!
+
+  """Full author object for this book"""
+  author: Author!
+
+  """ID of the author"""
+  authorId: ID!
+
+  """Genre of the book"""
+  genre: String!
+
+  """Year the book was published"""
+  publishedYear: Int!
+
+  """Title of the book"""
+  title: String!
+}
+
+input CreateAuthorInput {
+  """Optional biography"""
+  bio: String
+
+  """Author full name"""
+  name: String!
+}
+
+input CreateBookInput {
+  """ID of the author"""
+  authorId: ID!
+
+  """Genre of the book"""
+  genre: String!
+
+  """Year the book was published"""
+  publishedYear: Int!
+
+  """Book title"""
+  title: String!
+}
+
+type Mutation {
+  """Create a new author"""
+  createAuthor(createAuthorInput: CreateAuthorInput!): Author!
+
+  """Create new Book"""
+  createBook(createBookInput: CreateBookInput!): Book!
+
+  """Delete a book by ID — returns true if deleted"""
+  deleteBook(id: ID!): Boolean!
+
+  """Update an existing book (partial)"""
+  updateBook(updateBookInput: UpdateBookInput!): Book!
+}
+
+type Query {
+  """Get a single author by ID with their books"""
+  author(id: ID!): Author!
+
+  """Get all authors"""
+  authors: [Author!]!
+
+  """Get a single book by ID"""
+  book(id: ID!): Book!
+
+  """Get all books"""
+  books: [Book!]!
+}
+
+input UpdateBookInput {
+  """Updated genre"""
+  genre: String
+
+  """ID of the book to update"""
+  id: ID!
+
+  """Updated book title"""
+  title: String
+}
