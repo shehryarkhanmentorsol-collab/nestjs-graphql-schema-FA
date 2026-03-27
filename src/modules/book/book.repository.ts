@@ -15,33 +15,30 @@ export class BookRepository {
     @InjectModel(Book.name)
     private readonly bookModel: Model<BookDocument>,
   ) {}
-
-  async create(createBookInput: CreateBookInput): Promise<BookDocument> {
-    const book = new this.bookModel(createBookInput);
+ 
+  async create(input: CreateBookInput): Promise<BookDocument> {
+    const book = new this.bookModel(input);
     return book.save();
   }
-
+ 
   async findAll(): Promise<BookDocument[]> {
     return this.bookModel.find().exec();
   }
-
+ 
   async findById(id: string): Promise<BookDocument | null> {
     return this.bookModel.findById(id).exec();
   }
-
+ 
   async findByAuthorId(authorId: string): Promise<BookDocument[]> {
     return this.bookModel.find({ authorId }).exec();
   }
-
-  async update(
-    id: string,
-    updateBookInput: Partial<UpdateBookInput>,
-  ): Promise<BookDocument | null> {
+ 
+  async update(id: string, data: Partial<UpdateBookInput>): Promise<BookDocument | null> {
     return this.bookModel
-      .findByIdAndUpdate(id, { $set: updateBookInput }, { new: true })
+      .findByIdAndUpdate(id, { $set: data }, { new: true })
       .exec();
   }
-
+ 
   async delete(id: string): Promise<boolean> {
     const result = await this.bookModel.findByIdAndDelete(id).exec();
     return result !== null;

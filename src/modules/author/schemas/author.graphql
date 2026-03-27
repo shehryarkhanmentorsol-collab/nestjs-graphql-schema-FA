@@ -1,0 +1,32 @@
+
+
+#Types............
+
+type Author {
+    _id: ID!
+    name: String!
+    bio: String
+    books: [Book]
+    createdAt: String
+    updatedAt: String 
+}
+
+ #Input Types..........
+
+input CreateAuthorInput {
+    name: String!
+    bio: String
+}
+
+#Queries Types........
+
+extend type Query {
+    authors: [Author!]!
+    author(id: ID!): Author 
+}
+
+ #Mutations......
+ 
+extend type Mutation {
+  createAuthor(createAuthorInput: CreateAuthorInput!): Author!
+}

@@ -51,5 +51,5 @@ export class AuthorService{
 
   throw new Error('Failed to fetch author: Unknown error');
 }
-  }
+}
 }

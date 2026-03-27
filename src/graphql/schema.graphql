@@ -1,0 +1,36 @@
+# graphql/schema.graphql
+#
+# ROOT SCHEMA — defines the base Query and Mutation types.
+# Every module's .graphql file uses "extend type Query / Mutation"
+# to add their operations on top of these base types.
+# Without this root definition, "extend type" in modules would fail.
+
+type Query {
+  _root: String   # placeholder — NestJS requires at least one field on root types
+}
+
+type Mutation {
+  _root: String   # placeholder
+}
+
+
+
+type Author {
+  _id: ID!
+  name: String!
+  bio: String
+  books: [Book]
+  createdAt: String
+  updatedAt: String
+}
+
+type Book {
+  _id: ID!
+  title: String!
+  genre: String!
+  publishedYear: Int!
+  authorId: ID!
+  author: Author
+  createdAt: String
+  updatedAt: String
+}
